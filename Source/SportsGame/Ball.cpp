@@ -2,6 +2,8 @@
 
 
 #include "Ball.h"
+#include "Enemy.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABall::ABall()
@@ -20,6 +22,13 @@ void ABall::BeginPlay()
 	Super::BeginPlay();
 
 	BallMesh->SetSimulatePhysics(true);
+
+	TArray<AActor*> Enemies;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemy::StaticClass(), Enemies);
+	for (int i = 0; i < Enemies.Num(); i++)
+	{
+		Cast<AEnemy>(Enemies[i])->Ball = this;
+	}
 }
 
 // Called every frame
