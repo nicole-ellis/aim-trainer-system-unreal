@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Ball.h"
+#include "Components/BoxComponent.h"
 #include "Enemy.generated.h"
 
 
@@ -19,6 +20,17 @@ public:
 
 	UPROPERTY()
 	ABall* Ball;
+
+	UPROPERTY(EditAnywhere)
+		float RagdollTime = 5;
+	FTimerHandle RagdollTimerHandle;
+
+	UPROPERTY()
+		UBoxComponent* SpawnerBounds;
+
+	void Ragdoll();
+	UFUNCTION()
+		void StopRagdoll();
 
 	
 protected:

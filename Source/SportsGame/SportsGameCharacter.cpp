@@ -9,6 +9,8 @@
 #include "GameFramework/Controller.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Ball.h"
+#include "Enemy.h"
 #include "InputActionValue.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -85,11 +87,60 @@ void ASportsGameCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASportsGameCharacter::Look);
+
+		EnhancedInputComponent->BindAction(KickAction, ETriggerEvent::Started, this, &ASportsGameCharacter::Kick);
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Started, this, &ASportsGameCharacter::SprintStart);
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &ASportsGameCharacter::SprintEnd);
 	}
 	else
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
+}
+
+void ASportsGameCharacter::Kick()
+{
+	FVector Location = GetActorLocation() + GetActorForwardVector() * KickOffset;
+	TArray<FHitResult> Hits;
+	FCollisionShape Cube = FCollisionShape::MakeBox(FVector(KickOffset));
+	GetWorld()->SweepMultiByChannel(Hits, Location, Location, GetActorQuat(), ECC_WorldDynamic, Cube);
+	DrawDebugBox(GetWorld(), Location, Cube.GetExtent(), FColor::Blue);
+
+	for (FHitResult Hit : Hits)
+	{
+		if (Hit.GetActor() != this)
+		{
+			ABall* Ball = Cast<ABall>(Hit.GetActor());
+			if (Ball)
+			{
+				FVector LaunchDirection = Ball->BallMesh->GetComponentLocation() - GetActorLocation();
+				LaunchDirection.Normalize();
+				LaunchDirection *= 3;
+				LaunchDirection += FVector::UpVector;
+				Ball->BallMesh->AddImpulse(LaunchDirection*KickPower);
+			}
+			AEnemy* Enemy = Cast<AEnemy>(Hit.GetActor());
+			if (Enemy)
+			{
+				Enemy->Ragdoll();
+				FVector LaunchDirection = Enemy->GetActorLocation() - GetActorLocation();
+				LaunchDirection.Normalize();
+				LaunchDirection *= 3;
+				LaunchDirection += FVector::UpVector;
+				Enemy->GetMesh()->AddImpulse(LaunchDirection*KickPower);
+			}
+		}
+	}
+}
+
+void ASportsGameCharacter::SprintStart()
+{
+	GetCharacterMovement()->MaxWalkSpeed += SprintAmount;
+}
+
+void ASportsGameCharacter::SprintEnd()
+{
+	GetCharacterMovement()->MaxWalkSpeed -= SprintAmount;
 }
 
 void ASportsGameCharacter::Move(const FInputActionValue& Value)

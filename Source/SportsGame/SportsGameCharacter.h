@@ -46,7 +46,25 @@ class ASportsGameCharacter : public ACharacter
 
 public:
 	ASportsGameCharacter();
-	
+
+	UPROPERTY(EditAnywhere)
+		float KickOffset = 100;
+	UPROPERTY(EditAnywhere)
+		float KickPower = 5000;
+	UPROPERTY(EditAnywhere)
+		float SprintAmount = 500;
+
+	UPROPERTY(EditAnywhere)
+		UInputAction* KickAction;
+	UPROPERTY(EditAnywhere)
+		UInputAction* SprintAction;
+
+	UFUNCTION()
+		void Kick();
+	UFUNCTION()
+		void SprintStart();
+	UFUNCTION()
+		void SprintEnd();
 
 protected:
 
