@@ -66,6 +66,13 @@ public:
 	UFUNCTION()
 		void SprintEnd();
 
+	UPROPERTY(EditAnywhere)
+		UInputAction* UseAction;
+	UPROPERTY(EditAnywhere)
+		float UseDistance = 1000;
+	UFUNCTION()
+		void Use();
+	
 protected:
 
 	/** Called for movement input */

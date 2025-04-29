@@ -1,5 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
+#include "Interactable.h"
 #include "SportsGameCharacter.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
@@ -91,6 +92,8 @@ void ASportsGameCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		EnhancedInputComponent->BindAction(KickAction, ETriggerEvent::Started, this, &ASportsGameCharacter::Kick);
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Started, this, &ASportsGameCharacter::SprintStart);
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &ASportsGameCharacter::SprintEnd);
+
+		EnhancedInputComponent->BindAction(UseAction, ETriggerEvent::Started, this, &ASportsGameCharacter::Use);
 	}
 	else
 	{
@@ -141,6 +144,50 @@ void ASportsGameCharacter::SprintStart()
 void ASportsGameCharacter::SprintEnd()
 {
 	GetCharacterMovement()->MaxWalkSpeed -= SprintAmount;
+}
+
+void ASportsGameCharacter::Use()
+{
+	FVector Start = GetActorLocation();
+	FVector End = Start + GetFollowCamera()->GetForwardVector() * UseDistance;
+
+	FHitResult HitData;
+
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(this);
+
+	FCollisionQueryParams TraceParams;
+	TraceParams.bTraceComplex = true;
+	TraceParams.bReturnPhysicalMaterial = false;
+	TraceParams.AddIgnoredActors(ActorsToIgnore);
+	TraceParams.TraceTag = FName("Use Trace Tag");
+	GetWorld()->DebugDrawTraceTag = TraceParams.TraceTag;
+
+	bool bSweep = GetWorld()->LineTraceSingleByChannel(HitData, Start, End, ECC_Visibility, TraceParams);
+
+	if (bSweep)
+	{
+		if (HitData.GetActor())
+		{
+			UE_LOG(LogTemp, Warning, TEXT("We hit: %s"), *HitData.GetActor()->GetName());
+			if (HitData.GetActor()->GetClass()->ImplementsInterface(UInteractable::StaticClass()))
+			{
+				IInteractable::Execute_Interact(HitData.GetActor());
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Actor not interactable!"));
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("What happened?!"));
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Didn't hit an actor!"));
+	}
 }
 
 void ASportsGameCharacter::Move(const FInputActionValue& Value)

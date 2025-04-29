@@ -11,14 +11,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8d5a651-218e-4eee-8533-0d783b86af6a" name="Changes" comment="">
+    <list default="true" id="eff91ecc-d755-4acb-8ec2-e3f375670dd0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Input/IMC_Default.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Input/IMC_Default.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/A/NN/B7O6RKJJQ1ZRBR9L8SMRV4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/A/NN/B7O6RKJJQ1ZRBR9L8SMRV4.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/Enemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/Enemy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/Enemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/Enemy.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/8/UB/5NID3J7E1A7NQGS7H16Z2Y.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/8/UB/5NID3J7E1A7NQGS7H16Z2Y.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.h" afterDir="false" />
     </list>
@@ -30,11 +27,17 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Source/SportsGame/GravityWell.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/SportsGame/GravityWell.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/SportsGame/Interactable.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/SportsGame/Interactable.h" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
   "associatedIndex": 1
 }]]></component>
-  <component name="ProjectId" id="2wDg2Ja0HuGYmH3MkSYGMk76DLk" />
+  <component name="ProjectId" id="2wO8ZmqaN8ZiOs8WOHn7nlgP7jt" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -136,12 +139,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b8d5a651-218e-4eee-8533-0d783b86af6a" name="Changes" comment="" />
-      <created>1745581351653</created>
+      <changelist id="eff91ecc-d755-4acb-8ec2-e3f375670dd0" name="Changes" comment="" />
+      <created>1745901319116</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1745581351653</updated>
-      <workItem from="1745581354799" duration="3997000" />
+      <updated>1745901319116</updated>
+      <workItem from="1745901321031" duration="5986000" />
     </task>
     <servers />
   </component>
