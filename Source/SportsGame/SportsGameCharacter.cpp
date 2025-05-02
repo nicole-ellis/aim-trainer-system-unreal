@@ -12,7 +12,9 @@
 #include "EnhancedInputSubsystems.h"
 #include "Ball.h"
 #include "Enemy.h"
+#include "InGameUI.h"
 #include "InputActionValue.h"
+#include "Blueprint/UserWidget.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -103,34 +105,39 @@ void ASportsGameCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ASportsGameCharacter::Kick()
 {
-	FVector Location = GetActorLocation() + GetActorForwardVector() * KickOffset;
-	TArray<FHitResult> Hits;
-	FCollisionShape Cube = FCollisionShape::MakeBox(FVector(KickOffset));
-	GetWorld()->SweepMultiByChannel(Hits, Location, Location, GetActorQuat(), ECC_WorldDynamic, Cube);
-	DrawDebugBox(GetWorld(), Location, Cube.GetExtent(), FColor::Blue);
-
-	for (FHitResult Hit : Hits)
+	if (CurrentKickTimer >= KickCooldown)
 	{
-		if (Hit.GetActor() != this)
+		CurrentKickTimer = 0;
+		
+		FVector Location = GetActorLocation() + GetActorForwardVector() * KickOffset;
+		TArray<FHitResult> Hits;
+		FCollisionShape Cube = FCollisionShape::MakeBox(FVector(KickOffset));
+		GetWorld()->SweepMultiByChannel(Hits, Location, Location, GetActorQuat(), ECC_WorldDynamic, Cube);
+		DrawDebugBox(GetWorld(), Location, Cube.GetExtent(), FColor::Blue);
+
+		for (FHitResult Hit : Hits)
 		{
-			ABall* Ball = Cast<ABall>(Hit.GetActor());
-			if (Ball)
+			if (Hit.GetActor() != this)
 			{
-				FVector LaunchDirection = Ball->BallMesh->GetComponentLocation() - GetActorLocation();
-				LaunchDirection.Normalize();
-				LaunchDirection *= 3;
-				LaunchDirection += FVector::UpVector;
-				Ball->BallMesh->AddImpulse(LaunchDirection*KickPower);
-			}
-			AEnemy* Enemy = Cast<AEnemy>(Hit.GetActor());
-			if (Enemy)
-			{
-				Enemy->Ragdoll();
-				FVector LaunchDirection = Enemy->GetActorLocation() - GetActorLocation();
-				LaunchDirection.Normalize();
-				LaunchDirection *= 3;
-				LaunchDirection += FVector::UpVector;
-				Enemy->GetMesh()->AddImpulse(LaunchDirection*KickPower);
+				ABall* Ball = Cast<ABall>(Hit.GetActor());
+				if (Ball)
+				{
+					FVector LaunchDirection = Ball->BallMesh->GetComponentLocation() - GetActorLocation();
+					LaunchDirection.Normalize();
+					LaunchDirection *= 3;
+					LaunchDirection += FVector::UpVector;
+					Ball->BallMesh->AddImpulse(LaunchDirection*KickPower);
+				}
+				AEnemy* Enemy = Cast<AEnemy>(Hit.GetActor());
+				if (Enemy)
+				{
+					Enemy->Ragdoll();
+					FVector LaunchDirection = Enemy->GetActorLocation() - GetActorLocation();
+					LaunchDirection.Normalize();
+					LaunchDirection *= 3;
+					LaunchDirection += FVector::UpVector;
+					Enemy->GetMesh()->AddImpulse(LaunchDirection*KickPower);
+				}
 			}
 		}
 	}
@@ -138,12 +145,25 @@ void ASportsGameCharacter::Kick()
 
 void ASportsGameCharacter::SprintStart()
 {
-	GetCharacterMovement()->MaxWalkSpeed += SprintAmount;
+	if (!bIsSprinting)
+	{
+		if (CurrentStamina > 0)
+		{
+			GetCharacterMovement()->MaxWalkSpeed += SprintAmount;
+			bIsSprinting = true;
+			bIsStaminaRegen = false;
+		}
+	}	
 }
 
 void ASportsGameCharacter::SprintEnd()
 {
-	GetCharacterMovement()->MaxWalkSpeed -= SprintAmount;
+	if (bIsSprinting)
+	{
+		GetCharacterMovement()->MaxWalkSpeed -= SprintAmount;
+		bIsSprinting = false;
+		GetWorld()->GetTimerManager().SetTimer(StaminaRegenHandle, this, &ASportsGameCharacter::StartStaminaRegen, StaminaRefreshCooldown);
+	}
 }
 
 void ASportsGameCharacter::Use()
@@ -187,6 +207,70 @@ void ASportsGameCharacter::Use()
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Didn't hit an actor!"));
+	}
+}
+
+void ASportsGameCharacter::StartStaminaRegen()
+{
+	if (!bIsSprinting)
+	{
+		bIsStaminaRegen = true;
+	}
+}
+
+void ASportsGameCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if (bIsSprinting)
+	{
+		ReduceStamina(StaminaRate * DeltaSeconds);
+	}
+
+	if (bIsStaminaRegen)
+	{
+		ReduceStamina(-StaminaRate * DeltaSeconds * 2);
+	}
+
+	if (CurrentKickTimer < KickCooldown)
+	{
+		CurrentKickTimer += DeltaSeconds;
+		if (InGameUI)
+		{
+			InGameUI->UpdateValues();
+		}
+	}
+}
+
+void ASportsGameCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (InGameUIClass)
+	{
+		InGameUI = Cast<UInGameUI>(CreateWidget(GetGameInstance(), InGameUIClass));
+		InGameUI->Player = this;
+		InGameUI->UpdateValues();
+		InGameUI->AddToViewport();
+	}
+}
+
+void ASportsGameCharacter::ReduceStamina(float Amount)
+{
+	CurrentStamina = FMath::Clamp(CurrentStamina - Amount, 0, MaxStamina);
+	if (CurrentStamina == 0)
+	{
+		SprintEnd();
+	}
+
+	if (CurrentStamina == MaxStamina)
+	{
+		bIsStaminaRegen = false;
+	}
+
+	if (InGameUI)
+	{
+		InGameUI->UpdateValues();
 	}
 }
 

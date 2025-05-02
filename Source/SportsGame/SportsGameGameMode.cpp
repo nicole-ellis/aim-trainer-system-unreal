@@ -13,3 +13,11 @@ ASportsGameGameMode::ASportsGameGameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 }
+
+void ASportsGameGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
+	GetWorld()->GetFirstPlayerController()->SetShowMouseCursor(false);
+}

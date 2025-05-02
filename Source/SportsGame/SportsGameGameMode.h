@@ -13,6 +13,9 @@ class ASportsGameGameMode : public AGameModeBase
 
 public:
 	ASportsGameGameMode();
+
+	virtual void BeginPlay() override;
+	
 };
 
 

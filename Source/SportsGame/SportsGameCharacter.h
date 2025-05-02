@@ -7,6 +7,7 @@
 #include "Logging/LogMacros.h"
 #include "SportsGameCharacter.generated.h"
 
+class UInGameUI;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
@@ -72,6 +73,30 @@ public:
 		float UseDistance = 1000;
 	UFUNCTION()
 		void Use();
+
+	UPROPERTY(EditAnywhere)
+	float MaxStamina = 100;
+	UPROPERTY(EditAnywhere)
+	float StaminaRate = 20;
+	UPROPERTY(EditAnywhere)
+	float StaminaRefreshCooldown = 2;
+	UPROPERTY(EditAnywhere)
+	float KickCooldown = 0.5;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UInGameUI> InGameUIClass;
+	UPROPERTY()
+	UInGameUI* InGameUI;
+	float CurrentStamina = MaxStamina;
+	float CurrentKickTimer = KickCooldown;
+	bool bIsSprinting = false;
+	bool bIsStaminaRegen = false;
+	FTimerHandle StaminaRegenHandle;
+
+	UFUNCTION()
+	void StartStaminaRegen();
+	virtual void Tick(float DeltaSeconds) override;
+	virtual void BeginPlay() override;
+	void ReduceStamina(float Amount);
 	
 protected:
 
