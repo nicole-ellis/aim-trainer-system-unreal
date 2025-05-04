@@ -1,0 +1,19 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Navigation/NavLinkProxy.h"
+#include "JumpPoint.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class SPORTSGAME_API AJumpPoint : public ANavLinkProxy
+{
+	GENERATED_BODY()
+
+public:	
+	
+};

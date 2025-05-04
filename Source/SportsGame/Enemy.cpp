@@ -67,13 +67,6 @@ void AEnemy::BeginPlay()
 void AEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (Ball)
-	{
-		FVector TowardsBall = Ball->GetActorLocation() - GetActorLocation();
-		AddMovementInput(TowardsBall);
-	}
-
 }
 
 // Called to bind functionality to input
