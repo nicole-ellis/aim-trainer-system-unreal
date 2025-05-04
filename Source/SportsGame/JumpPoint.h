@@ -15,5 +15,9 @@ class SPORTSGAME_API AJumpPoint : public ANavLinkProxy
 	GENERATED_BODY()
 
 public:	
-	
+
+	virtual void BeginPlay() override;
+	UFUNCTION()
+		void LinkReached(AActor* Agent, const FVector& Destination);
+	void CopyLinkPoints();
 };
