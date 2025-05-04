@@ -13,5 +13,18 @@ void UInGameUI::UpdateValues()
 		CurrentStaminaText->SetText(FText::FromString(FString::FromInt(Player->CurrentStamina)));
 		MaxStaminaText->SetText(FText::FromString(FString::FromInt(Player->MaxStamina)));
 		KickCooldownBar->SetPercent(Player->CurrentKickTimer / Player->KickCooldown);
+
+		if (GameState)
+		{
+			PlayerScoreText->SetText(FText::AsNumber(GameState->PlayerScore));
+			EnemyScoreText->SetText(FText::AsNumber(GameState->EnemyScore));
+		}
 	}
+}
+
+void UInGameUI::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	GameState = Cast<ASportsGameState>(GetWorld()->GetGameState());
 }

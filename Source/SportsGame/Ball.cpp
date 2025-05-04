@@ -13,7 +13,19 @@ ABall::ABall()
 
 	BallMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Ball Mesh"));
 	RootComponent = BallMesh;
+}
 
+void ABall::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	FVector NormalImpulse, const FHitResult& Hit)
+{
+	if (OtherActor && OtherActor != this)
+	{
+		ACharacter* HitChar = Cast<ACharacter>(OtherActor);
+		if (HitChar)
+		{
+			LastTouch = HitChar;
+		}
+	}
 }
 
 // Called when the game starts or when spawned
@@ -29,6 +41,9 @@ void ABall::BeginPlay()
 	{
 		Cast<AEnemy>(Enemies[i])->Ball = this;
 	}
+
+	// Call OnHit function when hit
+	BallMesh->OnComponentHit.AddDynamic(this, &ABall::OnHit);
 }
 
 // Called every frame

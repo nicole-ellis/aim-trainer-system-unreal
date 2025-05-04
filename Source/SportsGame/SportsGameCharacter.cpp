@@ -127,6 +127,8 @@ void ASportsGameCharacter::Kick()
 					LaunchDirection *= 3;
 					LaunchDirection += FVector::UpVector;
 					Ball->BallMesh->AddImpulse(LaunchDirection*KickPower);
+
+					Ball->LastTouch = this;
 				}
 				AEnemy* Enemy = Cast<AEnemy>(Hit.GetActor());
 				if (Enemy)

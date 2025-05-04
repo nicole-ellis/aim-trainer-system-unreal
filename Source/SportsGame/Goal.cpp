@@ -2,6 +2,8 @@
 
 
 #include "Goal.h"
+#include "SportsGameCharacter.h"
+#include "SportsGameState.h"
 
 // Sets default values
 AGoal::AGoal()
@@ -27,6 +29,20 @@ void AGoal::OnBeginOverlap(UPrimitiveComponent* HitComp, AActor* OtherActor, UPr
 			FVector GoalDirection = Collider->GetForwardVector().GetSafeNormal();
 			if (BallDirection.Dot(GoalDirection) < 0)
 			{
+				ASportsGameState* GameState = Cast<ASportsGameState>(GetWorld()->GetGameState());
+				if (GameState)
+				{
+					ASportsGameCharacter* Player = Cast<ASportsGameCharacter>(Ball->LastTouch);
+					if (Player)
+					{
+						GameState->Score(true, 1);
+					}
+					else
+					{
+						GameState->Score(false, 1);
+					}
+				}
+				
 				// Destroy ball then spawn new one in centre
 				Ball->Destroy();
 				GetWorld()->SpawnActor(BallClass, &BallSpawn);

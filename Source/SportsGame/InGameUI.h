@@ -6,6 +6,7 @@
 #include "Components/TextBlock.h"
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "SportsGameState.h"
 #include "InGameUI.generated.h"
 
 class ASportsGameCharacter;
@@ -30,4 +31,13 @@ public:
 		ASportsGameCharacter* Player;
 
 	void UpdateValues();
+
+	UPROPERTY(meta = (BindWidget))
+		UTextBlock* PlayerScoreText;
+	UPROPERTY(meta = (BindWidget))
+		UTextBlock* EnemyScoreText;
+	UPROPERTY()
+		ASportsGameState* GameState;
+
+	virtual void NativeConstruct() override;
 };
