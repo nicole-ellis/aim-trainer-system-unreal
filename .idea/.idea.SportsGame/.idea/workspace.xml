@@ -11,19 +11,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a151090-a219-418e-bf87-9672fa4414a6" name="Changes" comment="">
+    <list default="true" id="ec8148a8-3d6f-4211-bf78-a94e52148155" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/MainMenu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/MainMenu.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Blueprints/Blueprint_CeilingLight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Blueprints/Blueprint_CeilingLight.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Maps/ThirdPersonMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Maps/ThirdPersonMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGame.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGame.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameGameMode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SportsGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/SportsGame.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,32 +26,28 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/InGameUI.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/InGameUI.h" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
-  <component name="ProjectId" id="2wRe5Cc8PHWJ4BKArkcIIIBBndM" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2waMYw95sS4HSQINIFJZnhIOHR5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C/C++ Project.SportsGame">
     <configuration name="SportsGame" type="CppProject" factoryName="C++ Project">
       <configuration_1 setup="1">
@@ -136,19 +125,23 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile" />
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3a151090-a219-418e-bf87-9672fa4414a6" name="Changes" comment="" />
-      <created>1746008629264</created>
+      <changelist id="ec8148a8-3d6f-4211-bf78-a94e52148155" name="Changes" comment="" />
+      <created>1746275283804</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1746008629264</updated>
-      <workItem from="1746008630967" duration="8028000" />
+      <updated>1746275283804</updated>
+      <workItem from="1746275285922" duration="642000" />
+      <workItem from="1746358009079" duration="1002000" />
     </task>
     <servers />
   </component>
