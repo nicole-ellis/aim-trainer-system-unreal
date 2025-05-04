@@ -1,5 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
+#include "Kismet/GameplayStatics.h"
 #include "Interactable.h"
 #include "SportsGameCharacter.h"
 #include "Engine/LocalPlayer.h"
@@ -115,6 +116,8 @@ void ASportsGameCharacter::Kick()
 		GetWorld()->SweepMultiByChannel(Hits, Location, Location, GetActorQuat(), ECC_WorldDynamic, Cube);
 		DrawDebugBox(GetWorld(), Location, Cube.GetExtent(), FColor::Blue);
 
+		TArray<AActor*> HitEnemies;
+		
 		for (FHitResult Hit : Hits)
 		{
 			if (Hit.GetActor() != this)
@@ -139,6 +142,19 @@ void ASportsGameCharacter::Kick()
 					LaunchDirection *= 3;
 					LaunchDirection += FVector::UpVector;
 					Enemy->GetMesh()->AddImpulse(LaunchDirection*KickPower);
+
+					if (!HitEnemies.Contains(Enemy))
+					{
+						HitEnemies.Add(Enemy);
+						if (HitTextClass)
+						{
+							UHitTextUI* SpawnedHit = Cast<UHitTextUI>(CreateWidget(GetGameInstance(), HitTextClass));
+							UGameplayStatics::ProjectWorldToScreen(GetWorld()->GetFirstPlayerController(), Enemy->GetMesh()->GetComponentLocation(), SpawnedHit->CurrentLocation);
+							SpawnedHit->HitText->SetText(FText::FromString(SpawnedHit->WordList[FMath::RandRange(0, SpawnedHit->WordList.Num() - 1)]));
+							SpawnedHit->TargetLocation += SpawnedHit->CurrentLocation;
+							SpawnedHit->AddToViewport();
+						}
+					}
 				}
 			}
 		}

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "HitTextUI.h"
 #include "SportsGameCharacter.generated.h"
 
 class UInGameUI;
@@ -97,6 +98,9 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void BeginPlay() override;
 	void ReduceStamina(float Amount);
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UHitTextUI> HitTextClass;
 	
 protected:
 
