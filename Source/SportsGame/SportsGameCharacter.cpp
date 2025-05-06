@@ -292,12 +292,23 @@ void ASportsGameCharacter::ReduceStamina(float Amount)
 	}
 }
 
+void ASportsGameCharacter::StartStun()
+{
+	bIsStunned = true;
+	GetWorld()->GetTimerManager().SetTimer(StunHandle, this, &ASportsGameCharacter::EndStun, 2);
+}
+
+void ASportsGameCharacter::EndStun()
+{
+	bIsStunned = false;
+}
+
 void ASportsGameCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
-	if (Controller != nullptr)
+	if (Controller != nullptr && !bIsStunned)
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();

@@ -3,6 +3,8 @@
 
 #include "Enemy.h"
 
+#include "BrainComponent.h"
+#include "EnemyBTController.h"
 #include "EnemySpawner.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -22,6 +24,11 @@ AEnemy::AEnemy()
 
 void AEnemy::Ragdoll()
 {
+	if (Cast<AEnemyBTController>(GetController()))
+	{
+		Cast<AEnemyBTController>(GetController())->BrainComponent->PauseLogic("Ragdolling!");
+	}
+	
 	GetMesh()->SetCollisionProfileName("Ragdoll");
 	GetMesh()->SetSimulatePhysics(true);
 	GetCapsuleComponent()->SetCollisionProfileName("NoCollision");
@@ -46,6 +53,12 @@ void AEnemy::StopRagdoll()
 	GetCapsuleComponent()->SetCollisionProfileName("Pawn");
 	//Increase this is enemy sticking in the ground on un-ragdoll
 	AddActorLocalOffset(FVector(0,0,50));
+	
+	if (Cast<AEnemyBTController>(GetController()))
+	{
+		Cast<AEnemyBTController>(GetController())->BrainComponent->ResumeLogic("Ragdolling!");
+	}
+	
 }
 
 // Called when the game starts or when spawned

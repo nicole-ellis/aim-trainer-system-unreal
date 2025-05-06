@@ -101,18 +101,21 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<UHitTextUI> HitTextClass;
+
+	void StartStun();
+	UFUNCTION()
+		void EndStun();
+	bool bIsStunned = false;
+	FTimerHandle StunHandle;
 	
 protected:
-
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-			
 
 protected:
-
 	virtual void NotifyControllerChanged() override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
