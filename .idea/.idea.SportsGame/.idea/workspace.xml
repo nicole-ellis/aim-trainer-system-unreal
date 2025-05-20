@@ -11,26 +11,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b48fde4-2964-4d90-a06c-1e20092bf9bc" name="Changes" comment="">
+    <list default="true" id="5df8601c-1fd4-4f78-bb0d-71dbca6f7afe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_SportsGameGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_SportsGameGameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/EnemyBT.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/EnemyBT.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/MainMenu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/MainMenu.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Blueprints/Blueprint_CeilingLight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Blueprints/Blueprint_CeilingLight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Input/IMC_Default.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Input/IMC_Default.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/BP_InGameUI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/BP_InGameUI.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/BP_MainMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/BP_MainMenu.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/Enemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/Enemy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/Enemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/Enemy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/InGameUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/InGameUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/InGameUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/InGameUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameGameMode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Maps/ThirdPersonMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Maps/ThirdPersonMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/0/43/HYQWORMY4JDQ5X3OKZXFLC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/0/70/64WUCR4YGNWKOOJAMYHPWV.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/0/70/64WUCR4YGNWKOOJAMYHPWV.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/0/8X/3JHFE9HZB9D3F3D5158GT4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/0/8X/3JHFE9HZB9D3F3D5158GT4.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/E/3L/3QSRL5PPSCHT4RIXPDPOLP.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/E/FR/LBG6LPN5JCL3FMVSI2CK6R.uasset" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,48 +29,28 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/Enemy.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/EnemyBTController.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/EnemyBTController.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/GenerateNewRandomLocationTask.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/LoadButton.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/LoadButton.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/PauseMenu.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/PauseMenu.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/SportsGame.Build.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/SportsGameGameInstance.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/SportsGameGameInstance.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/SportsGameSaveGame.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/SportsGameSaveGame.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/StunTask.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/StunTask.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/UpdateStunTask.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/SportsGame/UpdateStunTask.h" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 1
-}</component>
-  <component name="ProjectId" id="2wdc0h6jzpHrDaapOiSzhKew2gt" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2xLoSODqYydcD4ty14tyAGwYK6Y" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="C/C++ Project.SportsGame">
     <configuration name="SportsGame" type="CppProject" factoryName="C++ Project">
       <configuration_1 setup="1">
@@ -159,32 +128,25 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile">
-        <settings />
-      </deployment>
-      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <deployment type="dockerfile" />
       <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5b48fde4-2964-4d90-a06c-1e20092bf9bc" name="Changes" comment="" />
-      <created>1746374671175</created>
+      <changelist id="5df8601c-1fd4-4f78-bb0d-71dbca6f7afe" name="Changes" comment="" />
+      <created>1747726715354</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1746374671175</updated>
-      <workItem from="1746374673104" duration="1039000" />
-      <workItem from="1746516077329" duration="6815000" />
-      <workItem from="1746762550883" duration="919000" />
-      <workItem from="1747120319481" duration="10522000" />
+      <updated>1747726715354</updated>
+      <workItem from="1747726717469" duration="1286000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
