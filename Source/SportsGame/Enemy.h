@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Ball.h"
+#include "SportsGameCharacter.h"
 #include "Components/BoxComponent.h"
 #include "Enemy.generated.h"
 
@@ -31,6 +32,13 @@ public:
 	void Ragdoll();
 	UFUNCTION()
 		void StopRagdoll();
+
+	UPROPERTY(EditAnywhere)
+		int EXPAmount = 20;
+	UPROPERTY()
+		ASportsGameCharacter* Player;
+
+	virtual void EndPlay(const  EEndPlayReason::Type EndPlayReason) override;
 
 	
 protected:

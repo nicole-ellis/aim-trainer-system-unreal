@@ -14,6 +14,8 @@ void UInGameUI::UpdateValues()
 		MaxStaminaText->SetText(FText::FromString(FString::FromInt(Player->MaxStamina)));
 		KickCooldownBar->SetPercent(Player->CurrentKickTimer / Player->KickCooldown);
 
+		EXPBar->SetPercent((float)Player->CurrentEXP / Player->EXPToLevel);
+
 		if (GameState)
 		{
 			PlayerScoreText->SetText(FText::AsNumber(GameState->PlayerScore));

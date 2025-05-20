@@ -97,6 +97,8 @@ void ASportsGameCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &ASportsGameCharacter::SprintEnd);
 
 		EnhancedInputComponent->BindAction(UseAction, ETriggerEvent::Started, this, &ASportsGameCharacter::Use);
+
+		EnhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Started, this, &ASportsGameCharacter::PauseGame);
 	}
 	else
 	{
@@ -303,24 +305,53 @@ void ASportsGameCharacter::EndStun()
 	bIsStunned = false;
 }
 
+void ASportsGameCharacter::AddEXP(int EXPToAdd)
+{
+	CurrentEXP += EXPToAdd;
+	while(CurrentEXP > EXPToLevel)
+	{
+		CurrentEXP -= EXPToLevel;
+		EXPToLevel *= IncreaseMultiplier;
+		KickPower *= IncreaseMultiplier;
+		MaxStamina *= IncreaseMultiplier;
+		ReduceStamina(-MaxStamina);
+	}
+	InGameUI->UpdateValues();
+}
+
+void ASportsGameCharacter::PauseGame()
+{
+	if (!UGameplayStatics::IsGamePaused(GetWorld()))
+	{
+		UGameplayStatics::SetGamePaused(GetWorld(), true);
+		UPauseMenu* PauseMenu = Cast<UPauseMenu>(CreateWidget(GetGameInstance(), PauseMenuClass));
+		if (PauseMenu)
+		{
+			GetWorld()->GetFirstPlayerController()->SetShowMouseCursor(true);
+			GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+			PauseMenu->AddToViewport();
+		}
+	}
+}
+
 void ASportsGameCharacter::Move(const FInputActionValue& Value)
 {
-	// input is a Vector2D
+	// Input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
 	if (Controller != nullptr && !bIsStunned)
 	{
-		// find out which way is forward
+		// Find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
 
-		// get forward vector
+		// Get forward vector
 		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 	
-		// get right vector 
+		// Get right vector 
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
-		// add movement 
+		// Add movement 
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 		AddMovementInput(RightDirection, MovementVector.X);
 	}
@@ -328,12 +359,12 @@ void ASportsGameCharacter::Move(const FInputActionValue& Value)
 
 void ASportsGameCharacter::Look(const FInputActionValue& Value)
 {
-	// input is a Vector2D
+	// Input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
 
 	if (Controller != nullptr)
 	{
-		// add yaw and pitch input to controller
+		// Add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}

@@ -40,4 +40,7 @@ public:
 		ASportsGameState* GameState;
 
 	virtual void NativeConstruct() override;
+
+	UPROPERTY(meta = (BindWidget))
+		UProgressBar* EXPBar;
 };

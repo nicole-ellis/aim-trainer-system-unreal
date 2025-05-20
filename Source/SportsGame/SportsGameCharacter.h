@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "HitTextUI.h"
+#include "PauseMenu.h"
 #include "SportsGameCharacter.generated.h"
 
 class UInGameUI;
@@ -107,6 +108,24 @@ public:
 		void EndStun();
 	bool bIsStunned = false;
 	FTimerHandle StunHandle;
+
+	// Levelling up and XP
+	UPROPERTY(EditAnywhere)
+		int CurrentEXP = 0;
+	UPROPERTY(EditAnywhere)
+		int EXPToLevel = 50;
+	UPROPERTY(EditAnywhere)
+		float IncreaseMultiplier = 1.5;
+
+	void AddEXP(int EXPToAdd);
+
+	// To pause game
+	UPROPERTY(EditAnywhere)
+		UInputAction* PauseAction;
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UPauseMenu> PauseMenuClass;
+	UFUNCTION()
+		void PauseGame();
 	
 protected:
 	/** Called for movement input */

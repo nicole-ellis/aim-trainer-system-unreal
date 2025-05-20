@@ -6,6 +6,7 @@
 #include "BrainComponent.h"
 #include "EnemyBTController.h"
 #include "EnemySpawner.h"
+#include "SportsGameCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -58,7 +59,18 @@ void AEnemy::StopRagdoll()
 	{
 		Cast<AEnemyBTController>(GetController())->BrainComponent->ResumeLogic("Ragdolling!");
 	}
-	
+
+	GetCharacterMovement()->GravityScale = 1;
+}
+
+void AEnemy::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	if (Player)
+	{
+		Player->AddEXP(EXPAmount);
+	}
 }
 
 // Called when the game starts or when spawned
@@ -74,6 +86,8 @@ void AEnemy::BeginPlay()
 	{
 		SpawnerBounds = Cast<AEnemySpawner>(Spawner)->SpawnBounds;
 	}
+
+	Player = Cast<ASportsGameCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
 
 // Called every frame
