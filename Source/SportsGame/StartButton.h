@@ -4,10 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Interactable.h"
 #include "StartButton.generated.h"
 
+
+class UBoxComponent;
+class UStaticMeshComponent;
+
+
 UCLASS()
-class SPORTSGAME_API AStartButton : public AActor
+class SPORTSGAME_API AStartButton : public AActor, public IInteractable
 {
 	GENERATED_BODY()
 	
@@ -19,8 +25,23 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	// Components
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* ButtonMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UBoxComponent* InteractionBox;
+
+	// Is player in range
+	bool bPlayerInRange;
+
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// Called when player presses E while overlapping
+	void Interact_Implementation(AActor* Interactor);
 };
