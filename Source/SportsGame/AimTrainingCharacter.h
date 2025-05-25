@@ -39,6 +39,10 @@ class SPORTSGAME_API AAimTrainingCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* FireAction;
 
+	// Use Input Action
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* UseAction;
+
 	// Cameras
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FPSCamera;
@@ -86,6 +90,9 @@ public:
 	// Called from logic to get accuracy %
 	UFUNCTION(BlueprintCallable)
 	float GetAccuracy() const;
+
+	UFUNCTION()
+	void Use();
 
 protected:
 	// Called when the game starts or when spawned

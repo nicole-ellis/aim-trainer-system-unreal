@@ -44,12 +44,18 @@ void AStartButton::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AAct
 	}
 }
 
-void AStartButton::Interact_Implementation(AActor* Interactor)
+
+void AStartButton::Interact_Implementation()
 {
-	ACharacter* Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-	if (AAimTrainingCharacter* AimChar = Cast<AAimTrainingCharacter>(Player))
+	UE_LOG(LogTemp, Warning, TEXT("Button Interacted!"));
+
+	APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
+	if (!PC) return;
+	
+	AAimTrainingCharacter* Player = Cast<AAimTrainingCharacter>(PC->GetPawn());
+	if (Player)
 	{
-		AimChar->EnterAimMode();
+		Player->EnterAimMode();
 	}
 }
 

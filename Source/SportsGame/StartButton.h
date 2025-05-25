@@ -42,6 +42,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called when player presses E while overlapping
-	void Interact_Implementation(AActor* Interactor);
+	virtual void Interact_Implementation() override;
+	
 };
+
+

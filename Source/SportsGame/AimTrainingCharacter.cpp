@@ -5,6 +5,8 @@
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Interactable.h"
+#include "Android/AndroidSystemIncludes.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -26,9 +28,11 @@ AAimTrainingCharacter::AAimTrainingCharacter()
 
 	// Create FPS Camera
 	FPSCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FPSCamera"));
-	FPSCamera->SetupAttachment(GetCapsuleComponent());
+	FPSCamera->SetupAttachment(GetMesh()); // Attaches to skeletal mesh
 	FPSCamera->bUsePawnControlRotation = true;
-	
+
+	// Allow controller input to affect character rotation
+	bUseControllerRotationYaw = false;
 }
 
 void AAimTrainingCharacter::EnterAimMode()
@@ -42,7 +46,7 @@ void AAimTrainingCharacter::EnterAimMode()
 	ShotsHit = 0;
 	Attempts++;
 
-	// Switch camera logic
+	// Switch camera logic to FPS camera
 	if (FollowCamera)
 	{
 		FollowCamera->Deactivate();
@@ -50,7 +54,16 @@ void AAimTrainingCharacter::EnterAimMode()
 
 	if (FPSCamera)
 	{
-		FPSCamera->Activate();
+		FPSCamera->Activate(true);
+	}
+	
+	
+	APlayerController* PC = Cast<APlayerController>(GetController());
+	if (PC)
+	{
+		PC->SetViewTargetWithBlend(this, 1.0f); // Ensures player camera is set to this actor
+
+		PC->SetViewTarget(this);
 	}
 }
 
@@ -94,6 +107,41 @@ void AAimTrainingCharacter::ResetSession()
 float AAimTrainingCharacter::GetAccuracy() const
 {
 	return 0.0f; // Temp
+}
+
+void AAimTrainingCharacter::Use()
+{
+	// Line trace to interact with objects
+	FVector Start;
+	FRotator Rotation;
+	GetActorEyesViewPoint(Start, Rotation);
+
+	FVector End = Start + (Rotation.Vector() * 500.0f);
+
+	// Debug line
+	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 1.0f, 0, 1.0f);
+	
+	FHitResult HitResult;
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this);
+
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECC_Visibility, Params);
+
+	if (bHit)
+	{
+		AActor* HitActor = HitResult.GetActor();
+		UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *HitActor->GetName());
+		
+		if (HitActor && HitActor->Implements<UInteractable>())
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Actor implements Interactable!"));
+			IInteractable::Execute_Interact(HitActor);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Actor does not implement Interactable!"));
+		}
+	}
 }
 
 // Called when the game starts or when spawned
@@ -145,6 +193,7 @@ void AAimTrainingCharacter::Move(const FInputActionValue& Value)
 void AAimTrainingCharacter::Look(const FInputActionValue& Value)
 {
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
+	UE_LOG(LogTemp, Warning, TEXT("Look Axis Vector: %s"), *LookAxisVector.ToString());
 
 	if (Controller)
 	{
@@ -180,6 +229,9 @@ void AAimTrainingCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 		// Firing
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &AAimTrainingCharacter::Fire);
+
+		// Using
+		EnhancedInputComponent->BindAction(UseAction, ETriggerEvent::Started, this, &AAimTrainingCharacter::Use);
 	}
 	else
 	{
