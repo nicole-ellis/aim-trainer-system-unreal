@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "TargetSpawner.h"
 #include "InputActionValue.h"
 #include "InputAction.h"
 #include "InputMappingContext.h"
@@ -94,6 +95,18 @@ public:
 	UFUNCTION()
 		void Use();
 
+	// Target Spawner
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Target Spawner")
+	UTargetSpawner* TargetSpawner;
+
+	FTimerHandle CountdownHandle;
+	FTimerHandle EndAimModeHandle;
+
+	UFUNCTION()
+		void StartAimTraining();
+	UFUNCTION()
+		void ExitAimMode();
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

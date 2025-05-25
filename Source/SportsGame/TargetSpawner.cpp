@@ -15,12 +15,61 @@ UTargetSpawner::UTargetSpawner()
 
 }
 
+void UTargetSpawner::EndAimMode()
+{
+	bCanSpawn = false;
+	UE_LOG(LogTemp, Warning, TEXT("Aim mode ended."));
+
+	
+}
+
+void UTargetSpawner::RegisterShot(bool bHit)
+{
+	ShotsFired++;
+
+	if (bHit)
+	{
+		ShotsHit++;
+	}
+
+	// Live stats
+	float Accuracy = (ShotsFired > 0) ? (float)ShotsHit / ShotsFired : 0.0f;
+	UE_LOG(LogTemp, Log, TEXT("Shots: %d | Hits: %d | Accuracy: %.1f%%"), ShotsFired, ShotsHit, Accuracy * 100.0f);
+}
+
+void UTargetSpawner::OnTargetDestroyed(AActor* DestroyedTarget)
+{
+	if (!bCanSpawn)
+		return;
+
+	ActiveTargets.Remove(DestroyedTarget); // Remove from tracking
+	SpawnTargets(); // Maintain target count
+}
+
+void UTargetSpawner::BeginTraining()
+{
+	bCanSpawn = true;
+	ShotsFired = 0;
+	ShotsHit = 0;
+	ActiveTargets.Empty();
+
+	SpawnTargets();
+
+	if (GetWorld())
+	{
+		GetWorld()->GetTimerManager().SetTimer(GameTimerHandle, this, &UTargetSpawner::EndAimMode, GameDuration, false);
+	}
+}
+
 // Called when the game starts
 void UTargetSpawner::BeginPlay()
 {
-	
 	Super::BeginPlay();
-	
+
+	GetWorld()->GetTimerManager().SetTimer(GameTimerHandle, this, &UTargetSpawner::EndAimMode, GameDuration, false);
+	bCanSpawn = true;
+
+	SpawnTargets();
 }
 
 
@@ -34,34 +83,39 @@ void UTargetSpawner::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 void UTargetSpawner::SpawnTargets()
 {
-	if (!TargetToSpawn)
-		return;
 
-	UNavigationSystemV1* NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
-	if (!NavSys)
+	FNavLocation NavLocation;
+	
+	if (!TargetToSpawn || !bCanSpawn)
 		return;
 
 	AActor* Owner = GetOwner();
 	if (!Owner)
 		return;
-	
-	FVector Origin = GetOwner()->GetActorLocation();
 
-	for (int i = 0; i < TargetCount; ++i)
+	FVector Origin = Owner->GetActorLocation();
+
+	UNavigationSystemV1* NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+	if (!NavSys)
+		return;
+
+	while (ActiveTargets.Num() < TargetCount)
 	{
-		// Spread along X-axis
-		float X = Origin.X + (i * HorizontalSpread / TargetCount);
-
-		// Random Y and Z for horizontal/vertical varience
+		float X = Origin.X + (FMath::FRand() * HorizontalSpread);
 		float Y = Origin.Y + FMath::RandRange(-300.0f, 300.0f);
 		float Z = Origin.Z + FMath::RandRange(VerticalMin, VerticalMax);
 
 		FVector SamplePoint(X, Y, Z);
 
-		FNavLocation NavLocation;
 		if (NavSys->ProjectPointToNavigation(SamplePoint, NavLocation))
 		{
-			GetWorld()->SpawnActor<AActor>(TargetToSpawn, NavLocation.Location, FRotator::ZeroRotator);
+			AActor* Spawned = GetWorld()->SpawnActor<AActor>(TargetToSpawn, NavLocation.Location, FRotator::ZeroRotator);
+			if (Spawned)
+			{
+				Spawned->Tags.Add("Target");
+				Spawned->OnDestroyed.AddDynamic(this, &UTargetSpawner::OnTargetDestroyed);
+				ActiveTargets.Add(Spawned);
+			}
 		}
 	}
 }

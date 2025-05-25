@@ -17,6 +17,37 @@ public:
 	// Sets default values for this component's properties
 	UTargetSpawner();
 
+	// Timer logic
+	FTimerHandle GameTimerHandle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Timer")
+		float GameDuration = 30.0f;
+	
+	bool bCanSpawn = false;
+
+	// Tracking
+	UPROPERTY(BlueprintReadWrite)
+		int ShotsFired = 0;
+
+	UPROPERTY(BlueprintReadWrite)
+		int ShotsHit = 0;
+
+	// Spawned target references
+	UPROPERTY()
+	TArray<AActor*> ActiveTargets;
+
+	UFUNCTION()
+		void EndAimMode();
+
+	UFUNCTION(BlueprintCallable)
+		void RegisterShot(bool bHit);
+
+	UFUNCTION(BlueprintCallable)
+		void OnTargetDestroyed(AActor* DestroyedTarget);
+
+	UFUNCTION(BlueprintCallable)
+		void BeginTraining();
+	
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -43,3 +74,5 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void SpawnTargets();
 };
+
+

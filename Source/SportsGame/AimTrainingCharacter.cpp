@@ -2,10 +2,13 @@
 
 
 #include "AimTrainingCharacter.h"
+
+#include "AimTrainerGameMode.h"
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Interactable.h"
+#include "TargetSpawner.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -64,6 +67,11 @@ void AAimTrainingCharacter::EnterAimMode()
 
 		PC->SetViewTarget(this);
 	}
+
+	if (TargetSpawner)
+	{
+		GetWorld()->GetTimerManager().SetTimer(CountdownHandle, this, &AAimTrainingCharacter::StartAimTraining, 3.0f, false);
+	}
 }
 
 void AAimTrainingCharacter::Fire()
@@ -71,8 +79,6 @@ void AAimTrainingCharacter::Fire()
 	// Only allow firing if in aim mode
 	if (!bIsZoomed || bIsInCrashOutMode)
 		return;
-
-	ShotsFired++;
 
 	// Get player view
 	FVector Start;
@@ -87,9 +93,36 @@ void AAimTrainingCharacter::Fire()
 
 	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECC_Visibility, Params);
 
-	if (bHit)
+	AActor* HitActor = HitResult.GetActor();
+	if (bHit && HitActor)
 	{
-		ShotsHit++;
+		UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *HitActor->GetName());
+
+		if (HitActor->ActorHasTag("Target"))
+		{
+			ShotsHit++;
+
+			if (TargetSpawner)
+			{
+				TargetSpawner->RegisterShot(true);
+			}
+			
+			HitActor->Destroy(); // Only destroy if it's a tagged target
+		}
+		else
+		{
+			if (TargetSpawner)
+			{
+				TargetSpawner->RegisterShot(false);
+			}
+		}
+	}
+	else
+	{
+		if (TargetSpawner)
+		{
+			TargetSpawner->RegisterShot(false);
+		}
 	}
 
 	CalculateAccuracy();
@@ -143,6 +176,32 @@ void AAimTrainingCharacter::Use()
 	}
 }
 
+void AAimTrainingCharacter::StartAimTraining()
+{
+	if (TargetSpawner)
+	{
+		TargetSpawner->BeginTraining();
+	}
+
+	// Start the 30 sec timer
+	GetWorld()->GetTimerManager().SetTimer(EndAimModeHandle, this, &AAimTrainingCharacter::ExitAimMode, 30.0f, false);
+}
+
+void AAimTrainingCharacter::ExitAimMode()
+{
+	bIsZoomed = false;
+	bIsInCrashOutMode = false;
+
+	// Re-enable movement
+	GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+
+	// Switch back to third person camera
+	if (FPSCamera) FPSCamera->Deactivate();
+	if (FollowCamera) FollowCamera->Activate();
+
+	UE_LOG(LogTemp, Warning, TEXT("Exited Aim Mode"));
+}
+
 // Called when the game starts or when spawned
 void AAimTrainingCharacter::BeginPlay()
 {
@@ -172,6 +231,8 @@ void AAimTrainingCharacter::BeginPlay()
 	{
 		FollowCamera->Activate();
 	}
+
+	TargetSpawner = FindComponentByClass<UTargetSpawner>();
 	
 }
 
