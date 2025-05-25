@@ -58,22 +58,22 @@ public:
 	AAimTrainingCharacter();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Sensitivity;
+		float Sensitivity;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int ShotsFired;
+		int ShotsFired;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int ShotsHit;
+		int ShotsHit;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Attempts;
+		int Attempts;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bIsZoomed;
+		bool bIsZoomed;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bIsInCrashOutMode;
+		bool bIsInCrashOutMode;
 
 	// Called when player presses start button
 	void EnterAimMode();
@@ -89,10 +89,10 @@ public:
 
 	// Called from logic to get accuracy %
 	UFUNCTION(BlueprintCallable)
-	float GetAccuracy() const;
+		float GetAccuracy() const;
 
 	UFUNCTION()
-	void Use();
+		void Use();
 
 protected:
 	// Called when the game starts or when spawned

@@ -16,6 +16,8 @@ class SPORTSGAME_API AAimTrainerGameMode : public AGameModeBase
 
 public:
 	AAimTrainerGameMode();
+
+	virtual void BeginPlay() override;
 };
 
 

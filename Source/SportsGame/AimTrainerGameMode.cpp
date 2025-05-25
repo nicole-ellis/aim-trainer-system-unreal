@@ -14,3 +14,12 @@ AAimTrainerGameMode::AAimTrainerGameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 }
+
+void AAimTrainerGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
+	GetWorld()->GetFirstPlayerController()->SetShowMouseCursor(false);
+	
+}

@@ -6,7 +6,6 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Interactable.h"
-#include "Android/AndroidSystemIncludes.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -32,7 +31,7 @@ AAimTrainingCharacter::AAimTrainingCharacter()
 	FPSCamera->bUsePawnControlRotation = true;
 
 	// Allow controller input to affect character rotation
-	bUseControllerRotationYaw = false;
+	bUseControllerRotationYaw = true;
 }
 
 void AAimTrainingCharacter::EnterAimMode()
@@ -158,6 +157,9 @@ void AAimTrainingCharacter::BeginPlay()
 			Subsystem->ClearAllMappings(); // Clear IMC_Default
 			Subsystem->AddMappingContext(AimTrainerMappingContext, 0);
 		}
+
+		PlayerController->SetInputMode(FInputModeGameOnly());
+		PlayerController->bShowMouseCursor = false;
 	}
 
 	// Default camera setup
