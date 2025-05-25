@@ -199,7 +199,7 @@ void AAimTrainingCharacter::Look(const FInputActionValue& Value)
 
 	if (Controller)
 	{
-		AddControllerYawInput(-LookAxisVector.X * Sensitivity);
+		AddControllerYawInput(LookAxisVector.X * Sensitivity);
 		AddControllerPitchInput(LookAxisVector.Y * Sensitivity);
 	}
 }
