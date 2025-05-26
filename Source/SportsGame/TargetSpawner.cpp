@@ -66,10 +66,10 @@ void UTargetSpawner::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetWorld()->GetTimerManager().SetTimer(GameTimerHandle, this, &UTargetSpawner::EndAimMode, GameDuration, false);
-	bCanSpawn = true;
+	// GetWorld()->GetTimerManager().SetTimer(GameTimerHandle, this, &UTargetSpawner::EndAimMode, GameDuration, false);
+	// bCanSpawn = true;
 
-	SpawnTargets();
+	// SpawnTargets();
 }
 
 
@@ -83,8 +83,10 @@ void UTargetSpawner::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 void UTargetSpawner::SpawnTargets()
 {
-
-	FNavLocation NavLocation;
+	UE_LOG(LogTemp, Warning, TEXT("SpawnTargets() called"));
+	
+	int MaxAttempts = 50;
+	int Attempts = 0;
 	
 	if (!TargetToSpawn || !bCanSpawn)
 		return;
@@ -99,23 +101,38 @@ void UTargetSpawner::SpawnTargets()
 	if (!NavSys)
 		return;
 
-	while (ActiveTargets.Num() < TargetCount)
+	while (ActiveTargets.Num() < TargetCount && Attempts < MaxAttempts)
 	{
+		Attempts++;
+		
 		float X = Origin.X + (FMath::FRand() * HorizontalSpread);
-		float Y = Origin.Y + FMath::RandRange(-300.0f, 300.0f);
+		float Y = Origin.Y + FMath::RandRange(-300.0f, 800.0f);
 		float Z = Origin.Z + FMath::RandRange(VerticalMin, VerticalMax);
 
 		FVector SamplePoint(X, Y, Z);
+		FNavLocation NavLocation;
 
-		if (NavSys->ProjectPointToNavigation(SamplePoint, NavLocation))
+		UE_LOG(LogTemp, Warning, TEXT("Trying to spawn at: X=%.1f Y=%.1f Z=%.1f"), X, Y, Z);
+
+		if (NavSys && NavSys->ProjectPointToNavigation(SamplePoint, NavLocation))
 		{
 			AActor* Spawned = GetWorld()->SpawnActor<AActor>(TargetToSpawn, NavLocation.Location, FRotator::ZeroRotator);
 			if (Spawned)
 			{
+				UE_LOG(LogTemp, Error, TEXT("Spawned: %s"), *Spawned->GetName());
+				
 				Spawned->Tags.Add("Target");
 				Spawned->OnDestroyed.AddDynamic(this, &UTargetSpawner::OnTargetDestroyed);
 				ActiveTargets.Add(Spawned);
 			}
+			else
+			{
+				UE_LOG(LogTemp, Error, TEXT("Spawn failed - TargetToSpawn was nullptr or not valid."));
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Failed to project to navmesh."));
 		}
 	}
 }

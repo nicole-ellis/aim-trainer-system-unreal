@@ -2,13 +2,14 @@
 
 
 #include "AimTrainingCharacter.h"
-
+#include "EngineUtils.h"
 #include "AimTrainerGameMode.h"
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Interactable.h"
 #include "TargetSpawner.h"
+#include "Blueprint/UserWidget.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -72,6 +73,20 @@ void AAimTrainingCharacter::EnterAimMode()
 	{
 		GetWorld()->GetTimerManager().SetTimer(CountdownHandle, this, &AAimTrainingCharacter::StartAimTraining, 3.0f, false);
 	}
+
+	// Setting crosshair visibility
+	if (CrosshairWidgetClass && !CrosshairWidgetInstance)
+	{
+		CrosshairWidgetInstance = CreateWidget<UUserWidget>(GetWorld(), CrosshairWidgetClass);
+		if (CrosshairWidgetInstance)
+		{
+			CrosshairWidgetInstance->AddToViewport();
+		}
+		else if (CrosshairWidgetInstance)
+		{
+			CrosshairWidgetInstance->SetVisibility(ESlateVisibility::Visible);
+		}
+	}
 }
 
 void AAimTrainingCharacter::Fire()
@@ -98,6 +113,10 @@ void AAimTrainingCharacter::Fire()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *HitActor->GetName());
 
+		for (const FName& Tag : HitActor->Tags)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Actor Tag: %s"), *Tag.ToString());
+		}
 		if (HitActor->ActorHasTag("Target"))
 		{
 			ShotsHit++;
@@ -151,7 +170,7 @@ void AAimTrainingCharacter::Use()
 	FVector End = Start + (Rotation.Vector() * 500.0f);
 
 	// Debug line
-	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 1.0f, 0, 1.0f);
+	DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 1.0f, 0, 1.0f);
 	
 	FHitResult HitResult;
 	FCollisionQueryParams Params;
@@ -200,6 +219,12 @@ void AAimTrainingCharacter::ExitAimMode()
 	if (FollowCamera) FollowCamera->Activate();
 
 	UE_LOG(LogTemp, Warning, TEXT("Exited Aim Mode"));
+
+	// Hide crosshair if not in aim training
+	if (CrosshairWidgetInstance)
+	{
+		CrosshairWidgetInstance->SetVisibility(ESlateVisibility::Hidden);
+	}
 }
 
 // Called when the game starts or when spawned
@@ -232,7 +257,25 @@ void AAimTrainingCharacter::BeginPlay()
 		FollowCamera->Activate();
 	}
 
-	TargetSpawner = FindComponentByClass<UTargetSpawner>();
+	for (TActorIterator<AActor> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		AActor* Actor = *ActorItr;
+		UTargetSpawner* Spawner = Actor->FindComponentByClass<UTargetSpawner>();
+		if (Spawner)
+		{
+			TargetSpawner = Spawner;
+				break;
+		}
+	}
+
+	if (CrosshairWidgetClass)
+	{
+		UUserWidget* CrosshairWidget = CreateWidget<UUserWidget>(GetWorld(), CrosshairWidgetClass);
+		if (CrosshairWidget)
+		{
+			CrosshairWidget->AddToViewport();
+		}
+	}
 	
 }
 
@@ -256,8 +299,9 @@ void AAimTrainingCharacter::Move(const FInputActionValue& Value)
 void AAimTrainingCharacter::Look(const FInputActionValue& Value)
 {
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
-	UE_LOG(LogTemp, Warning, TEXT("Look Axis Vector: %s"), *LookAxisVector.ToString());
+	// UE_LOG(LogTemp, Warning, TEXT("Look Axis Vector: %s"), *LookAxisVector.ToString());
 
+	// Add sensitivity to X Y axis - could add feature to change in future
 	if (Controller)
 	{
 		AddControllerYawInput(LookAxisVector.X * Sensitivity);

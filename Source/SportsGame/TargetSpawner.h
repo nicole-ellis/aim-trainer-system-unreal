@@ -69,10 +69,11 @@ public:
 		float VerticalMin = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
-		float VerticalMax = 500.0f;
+		float VerticalMax = 200.0f;
 	
 	UFUNCTION(BlueprintCallable)
 		void SpawnTargets();
+	
 };
 
 

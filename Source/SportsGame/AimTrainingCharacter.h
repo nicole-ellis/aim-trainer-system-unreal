@@ -92,13 +92,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 		float GetAccuracy() const;
 
-	UFUNCTION()
-		void Use();
-
 	// Target Spawner
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Target Spawner")
-	UTargetSpawner* TargetSpawner;
+		UTargetSpawner* TargetSpawner;
 
+	// Crosshair
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+		TSubclassOf<UUserWidget> CrosshairWidgetClass;
+	UUserWidget* CrosshairWidgetInstance;
+	
 	FTimerHandle CountdownHandle;
 	FTimerHandle EndAimModeHandle;
 
@@ -106,6 +108,8 @@ public:
 		void StartAimTraining();
 	UFUNCTION()
 		void ExitAimMode();
+	UFUNCTION()
+		void Use();
 	
 protected:
 	// Called when the game starts or when spawned
