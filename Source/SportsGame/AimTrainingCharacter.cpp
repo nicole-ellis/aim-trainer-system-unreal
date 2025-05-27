@@ -13,6 +13,8 @@
 #include "Blueprint/UserWidget.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "InGameUIAimTraining.h"
+#include "Engine/StaticMeshActor.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Aim Training Character
 
@@ -125,10 +127,25 @@ void AAimTrainingCharacter::Fire()
 		if (HitActor->Tags.Contains("Target"))
 		{
 			// UE_LOG(LogTemp, Warning, TEXT("-> Hit a target: %s"), *HitActor->GetName());
-			HitActor->Destroy();
-			ShotsHit++; // Count as a real hit
-			TargetSpawner->RegisterShot(true);
-			bCountedHit = true;
+			const bool bBounce = UKismetMathLibrary::RandomBoolWithWeight(0.3f);
+			if (bBounce)
+			{
+				// Target bounces (30% chance)
+				if (UStaticMeshComponent* MeshComponent = HitActor->FindComponentByClass<UStaticMeshComponent>())
+				{
+						MeshComponent->SetSimulatePhysics(true);
+						MeshComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+						UE_LOG(LogTemp, Warning, TEXT("Physics after: %s"), MeshComponent->IsSimulatingPhysics() ? TEXT("ON") : TEXT("OFF"));
+				}
+			}
+			else
+			{
+				// Actually destroys the target
+				HitActor->Destroy();
+				ShotsHit++; // Count as a real hit
+				TargetSpawner->RegisterShot(true);
+				bCountedHit = true;
+			}
 		}
 	}
 	

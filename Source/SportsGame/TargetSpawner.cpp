@@ -2,7 +2,6 @@
 
 
 #include "TargetSpawner.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "GameFramework/Actor.h"
 #include "NavigationSystem.h"
 #include "Engine/World.h"
@@ -126,6 +125,7 @@ void UTargetSpawner::SpawnTargets()
 				Spawned->Tags.Add("Target"); // Targets spawn with the tag "Target" so that the player can only break targets
 				Spawned->OnDestroyed.AddDynamic(this, &UTargetSpawner::OnTargetDestroyed);
 				ActiveTargets.Add(Spawned);
+				
 			}
 			else
 			{
@@ -145,7 +145,6 @@ void UTargetSpawner::DestroyAllTargets()
 	TArray<AActor*> ToDestroy;
 
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), TargetToSpawn, ToDestroy);
-	
 
 	for (AActor* Target : ToDestroy)
 	{

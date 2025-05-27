@@ -11,8 +11,12 @@ void AMainMenuGameMode::BeginPlay()
 	if (MainMenuClass)
 	{
 		UUserWidget* MainMenu = Cast<UUserWidget>(CreateWidget(GetGameInstance(), MainMenuClass));
-		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
-		GetWorld()->GetFirstPlayerController()->SetShowMouseCursor(true);
+		APlayerController* PC = GetWorld()->GetFirstPlayerController();
+		if (PC)
+		{
+			PC->SetInputMode(FInputModeUIOnly());
+			PC->bShowMouseCursor = true;
+		}
 		MainMenu->AddToViewport();
 	}
 }

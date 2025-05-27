@@ -82,6 +82,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<UInGameUIAimTraining> InGameUIAimTrainingClass;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UTargetSpawner> TargetClass;
 	
 	// Called when player presses start button
 	void EnterAimMode();
@@ -107,8 +110,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
 		TSubclassOf<UUserWidget> CrosshairWidgetClass;
 	UPROPERTY()
-	UUserWidget* CrosshairWidgetInstance;
-	
+		UUserWidget* CrosshairWidgetInstance;
 	
 	FTimerHandle CountdownHandle;
 	FTimerHandle EndAimModeHandle;

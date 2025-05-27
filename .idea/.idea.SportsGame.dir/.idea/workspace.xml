@@ -8,18 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54b98038-1263-495a-86e4-f0d2e11c4168" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SportsGame.dir/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/projectSettingsUpdater.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vsconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/AimTrainerMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/AimTrainerMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_AimTrainingCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_AimTrainingCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SportsGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SportsGame.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SportsGame/AimTrainingCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/AimTrainingCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SportsGame/AimTrainingCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/AimTrainingCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGame.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGame.Build.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SportsGame/TargetSpawner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/TargetSpawner.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SportsGame/TargetSpawner.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/TargetSpawner.h" afterDir="false" />
     </list>
@@ -55,7 +47,14 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://2" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://4" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.5/Engine/Source/Runtime/Engine/Classes/Kismet/KismetMathLibrary.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
@@ -163,7 +162,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748339921900</updated>
-      <workItem from="1748339924142" duration="1048000" />
+      <workItem from="1748339924142" duration="10169000" />
     </task>
     <servers />
   </component>
@@ -173,21 +172,5 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Source/SportsGame/AimTrainingCharacter.cpp</url>
-          <line>225</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Source/SportsGame/TargetSpawner.cpp</url>
-          <line>144</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

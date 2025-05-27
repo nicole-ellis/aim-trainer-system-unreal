@@ -78,7 +78,7 @@ public:
 	
 	// Destroys all targets left
 	UFUNCTION(BlueprintCallable, Category = "Target Spawner")
-		void DestroyAllTargets(); 
+		void DestroyAllTargets();
 };
 
 
