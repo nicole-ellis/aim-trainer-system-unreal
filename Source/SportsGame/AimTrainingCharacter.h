@@ -77,11 +77,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool bIsInCrashOutMode;
 	
-	//UPROPERTY()
-	//	UInGameUIAimTraining* InGameUIAimTraining;
+	UPROPERTY()
+		UInGameUIAimTraining* InGameUIAimTraining;
 
-	//UPROPERTY(EditAnywhere)
-	//	TSubclassOf<UInGameUIAimTraining> InGameUIAimTrainingClass;
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UInGameUIAimTraining> InGameUIAimTrainingClass;
 	
 	// Called when player presses start button
 	void EnterAimMode();
@@ -106,7 +106,9 @@ public:
 	// Crosshair
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
 		TSubclassOf<UUserWidget> CrosshairWidgetClass;
+	UPROPERTY()
 	UUserWidget* CrosshairWidgetInstance;
+	
 	
 	FTimerHandle CountdownHandle;
 	FTimerHandle EndAimModeHandle;

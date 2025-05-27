@@ -7,6 +7,7 @@
 #include "NavigationSystem.h"
 #include "Engine/World.h"
 #include "CoreMinimal.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 UTargetSpawner::UTargetSpawner()
@@ -141,12 +142,16 @@ void UTargetSpawner::SpawnTargets()
 void UTargetSpawner::DestroyAllTargets()
 {
 	// Just in case Destroy() immediately triggers
-	TArray<AActor*> ToDestroy = ActiveTargets;
+	TArray<AActor*> ToDestroy;
+
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), TargetToSpawn, ToDestroy);
+	
 
 	for (AActor* Target : ToDestroy)
 	{
 		if (IsValid(Target)) // Checks not null and not pending 
 		{
+			Target->OnDestroyed.RemoveAll(this);
 			Target->Destroy();
 		}
 	}

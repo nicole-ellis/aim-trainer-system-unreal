@@ -52,6 +52,7 @@ void AAimTrainingCharacter::EnterAimMode()
 	ShotsFired = 0;
 	ShotsHit = 0;
 	Attempts++;
+	InGameUIAimTraining->UpdateValues();
 
 	// Switch camera logic to FPS camera
 	if (FollowCamera)
@@ -114,6 +115,7 @@ void AAimTrainingCharacter::Fire()
 	// DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 1.0f, 0, 1.0f);
 
 	ShotsFired++;
+	InGameUIAimTraining->UpdateValues();
 	bool bCountedHit = false;
 	
 	if (bHit && Hit.GetActor() && TargetSpawner)
@@ -147,7 +149,11 @@ void AAimTrainingCharacter::ResetSession()
 
 float AAimTrainingCharacter::GetAccuracy() const
 {
-	return (ShotsHit / ShotsFired)* 100.0f;
+	if (ShotsFired > 0)
+	{
+		return ((float)ShotsHit / ShotsFired)* 100.0f;
+	}
+	return 0;
 }
 
 void AAimTrainingCharacter::Use()
@@ -242,13 +248,13 @@ void AAimTrainingCharacter::BeginPlay()
 		PlayerController->bShowMouseCursor = false;
 
 		// In Game UI
-		//if (InGameUIAimTrainingClass)
-		//{
-		//	InGameUIAimTraining = Cast<UInGameUIAimTraining>(CreateWidget(GetGameInstance(), InGameUIAimTrainingClass));
-		//	InGameUIAimTraining->Player = this;
-		//	InGameUIAimTraining->UpdateValues();
-		//	InGameUIAimTraining->AddToViewport();
-		//}
+		if (InGameUIAimTrainingClass)
+		{
+			InGameUIAimTraining = Cast<UInGameUIAimTraining>(CreateWidget(GetGameInstance(), InGameUIAimTrainingClass));
+			InGameUIAimTraining->Player = this;
+			InGameUIAimTraining->UpdateValues();
+			InGameUIAimTraining->AddToViewport();
+		}
 	}
 
 	// Default camera setup

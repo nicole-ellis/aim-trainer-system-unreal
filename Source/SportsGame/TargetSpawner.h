@@ -47,6 +47,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void BeginTraining();
+
+	
 	
 protected:
 	// Called when the game starts
