@@ -14,6 +14,7 @@
 
 class UInputMappingContext;
 class UInputAction;
+class UInGameUIAimTraining;
 
 UCLASS()
 class SPORTSGAME_API AAimTrainingCharacter : public ACharacter
@@ -22,37 +23,37 @@ class SPORTSGAME_API AAimTrainingCharacter : public ACharacter
 
 	// Mapping Context
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputMappingContext* AimTrainerMappingContext;
+		UInputMappingContext* AimTrainerMappingContext;
 
 	// Jump Input Action
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* JumpAction;
+		UInputAction* JumpAction;
 
 	// Move Input Action
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* MoveAction;
+		UInputAction* MoveAction;
 
 	/// Look Input Action
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* LookAction;
+		UInputAction* LookAction;
 
 	// Fire Input Action
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* FireAction;
+		UInputAction* FireAction;
 
 	// Use Input Action
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* UseAction;
+		UInputAction* UseAction;
 
 	// Cameras
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* FPSCamera;
+		class UCameraComponent* FPSCamera;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* CameraBoom;
+		class USpringArmComponent* CameraBoom;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* FollowCamera;
+		class UCameraComponent* FollowCamera;
 
 public:
 	// Sets default values for this character's properties
@@ -75,7 +76,13 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool bIsInCrashOutMode;
+	
+	//UPROPERTY()
+	//	UInGameUIAimTraining* InGameUIAimTraining;
 
+	//UPROPERTY(EditAnywhere)
+	//	TSubclassOf<UInGameUIAimTraining> InGameUIAimTrainingClass;
+	
 	// Called when player presses start button
 	void EnterAimMode();
 

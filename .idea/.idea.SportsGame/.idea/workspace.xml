@@ -12,13 +12,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7d0d90c-5f53-4285-bbeb-6760ceb168eb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SportsGame/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_Target.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_Target.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_TargetSpawnerHolder.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_TargetSpawnerHolder.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/AimTrainerMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/AimTrainerMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_AimTrainingCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/BP_AimTrainingCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SportsGame/AimTrainingCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/AimTrainingCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SportsGame/AimTrainingCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/AimTrainingCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SportsGame/JumpPoint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/JumpPoint.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SportsGame/MainMenuGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/MainMenuGameMode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/SportsGameCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SportsGame/TargetSpawner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/TargetSpawner.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SportsGame/TargetSpawner.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SportsGame/TargetSpawner.h" afterDir="false" />
     </list>
@@ -30,28 +32,28 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2xdEzaIGZcaeauX8pydfU3xSQXf" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C/C++ Project.SportsGame">
     <configuration name="SportsGame" type="CppProject" factoryName="C++ Project">
       <configuration_1 setup="1">
@@ -129,7 +131,10 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile" />
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
   </component>
@@ -141,7 +146,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748259815166</updated>
-      <workItem from="1748259817126" duration="8634000" />
+      <workItem from="1748259817126" duration="16205000" />
+      <workItem from="1748336644755" duration="340000" />
     </task>
     <servers />
   </component>

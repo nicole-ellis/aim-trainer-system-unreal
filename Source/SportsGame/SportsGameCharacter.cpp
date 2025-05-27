@@ -1,8 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
+#include "SportsGameCharacter.h"
 
 #include "Kismet/GameplayStatics.h"
 #include "Interactable.h"
-#include "SportsGameCharacter.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"

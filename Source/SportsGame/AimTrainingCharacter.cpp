@@ -4,6 +4,7 @@
 #include "AimTrainingCharacter.h"
 #include "EngineUtils.h"
 #include "AimTrainerGameMode.h"
+#include "InGameUIAimTraining.h"
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
@@ -11,6 +12,9 @@
 #include "TargetSpawner.h"
 #include "Blueprint/UserWidget.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "InGameUIAimTraining.h"
+
+// Aim Training Character
 
 // Sets default values
 AAimTrainingCharacter::AAimTrainingCharacter()
@@ -99,50 +103,36 @@ void AAimTrainingCharacter::Fire()
 	FVector Start;
 	FRotator Rotation;
 	GetActorEyesViewPoint(Start, Rotation);
-
 	FVector End = Start + (Rotation.Vector() * 5000.0f);
 
-	FHitResult HitResult;
+	FHitResult Hit;
 	FCollisionQueryParams Params;
 	Params.AddIgnoredActor(this); // So player doesnt hit themselves
+	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, Params);
 
-	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECC_Visibility, Params);
+	// Debug line
+	// DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 1.0f, 0, 1.0f);
 
-	AActor* HitActor = HitResult.GetActor();
-	if (bHit && HitActor)
+	ShotsFired++;
+	bool bCountedHit = false;
+	
+	if (bHit && Hit.GetActor() && TargetSpawner)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *HitActor->GetName());
-
-		for (const FName& Tag : HitActor->Tags)
+		AActor* HitActor = Hit.GetActor();
+		
+		if (HitActor->Tags.Contains("Target"))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Actor Tag: %s"), *Tag.ToString());
-		}
-		if (HitActor->ActorHasTag("Target"))
-		{
-			ShotsHit++;
-
-			if (TargetSpawner)
-			{
-				TargetSpawner->RegisterShot(true);
-			}
-			
-			HitActor->Destroy(); // Only destroy if it's a tagged target
-		}
-		else
-		{
-			if (TargetSpawner)
-			{
-				TargetSpawner->RegisterShot(false);
-			}
+			// UE_LOG(LogTemp, Warning, TEXT("-> Hit a target: %s"), *HitActor->GetName());
+			HitActor->Destroy();
+			ShotsHit++; // Count as a real hit
+			TargetSpawner->RegisterShot(true);
+			bCountedHit = true;
 		}
 	}
-	else
-	{
-		if (TargetSpawner)
-		{
-			TargetSpawner->RegisterShot(false);
-		}
-	}
+	
+	// If nothing was destroyed it was a miss
+	if (!bCountedHit && TargetSpawner)
+		TargetSpawner->RegisterShot(false);
 
 	CalculateAccuracy();
 }	
@@ -157,7 +147,7 @@ void AAimTrainingCharacter::ResetSession()
 
 float AAimTrainingCharacter::GetAccuracy() const
 {
-	return 0.0f; // Temp
+	return (ShotsHit / ShotsFired)* 100.0f;
 }
 
 void AAimTrainingCharacter::Use()
@@ -225,6 +215,12 @@ void AAimTrainingCharacter::ExitAimMode()
 	{
 		CrosshairWidgetInstance->SetVisibility(ESlateVisibility::Hidden);
 	}
+
+	// Destroy any remaining targets
+	if (TargetSpawner)
+	{
+		TargetSpawner->DestroyAllTargets();
+	}
 }
 
 // Called when the game starts or when spawned
@@ -239,11 +235,20 @@ void AAimTrainingCharacter::BeginPlay()
 		if (Subsystem && AimTrainerMappingContext)
 		{
 			Subsystem->ClearAllMappings(); // Clear IMC_Default
-			Subsystem->AddMappingContext(AimTrainerMappingContext, 0);
+			Subsystem->AddMappingContext(AimTrainerMappingContext, 0); // Apply IMC_AimTraining
 		}
 
 		PlayerController->SetInputMode(FInputModeGameOnly());
 		PlayerController->bShowMouseCursor = false;
+
+		// In Game UI
+		//if (InGameUIAimTrainingClass)
+		//{
+		//	InGameUIAimTraining = Cast<UInGameUIAimTraining>(CreateWidget(GetGameInstance(), InGameUIAimTrainingClass));
+		//	InGameUIAimTraining->Player = this;
+		//	InGameUIAimTraining->UpdateValues();
+		//	InGameUIAimTraining->AddToViewport();
+		//}
 	}
 
 	// Default camera setup
@@ -273,12 +278,13 @@ void AAimTrainingCharacter::BeginPlay()
 		UUserWidget* CrosshairWidget = CreateWidget<UUserWidget>(GetWorld(), CrosshairWidgetClass);
 		if (CrosshairWidget)
 		{
-			CrosshairWidget->AddToViewport();
+			CrosshairWidget->AddToViewport(); // Adds crosshair when in aim training mode
 		}
 	}
 	
 }
 
+// Enables movement
 void AAimTrainingCharacter::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -314,6 +320,19 @@ void AAimTrainingCharacter::Look(const FInputActionValue& Value)
 void AAimTrainingCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	//if (Attempts++)
+	//{
+	//	if (InGameUIAimTraining)
+	//	{
+	//		InGameUIAimTraining->UpdateValues();
+	//	}
+	//}
+
+	//if (GetAccuracy())
+	//{
+		
+	//}
 
 }
 
