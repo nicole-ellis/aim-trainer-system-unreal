@@ -2,12 +2,12 @@
 
 **Aim Training Simulator Sports Sports**
 
-**Movement:**
-W - Forward
-A - Left
-S - Back
+**Movement:**/n
+W - Forward/n
+A - Left/n
+S - Back/n
 D - Right
 
-**Pressable Buttons:**
-E - Used to press the button to start the level
+**Pressable Buttons:**/n
+E - Used to press the button to start the level/n
 Left click - Used to fire (shoot) at targets
