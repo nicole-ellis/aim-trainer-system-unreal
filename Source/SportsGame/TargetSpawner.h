@@ -68,6 +68,9 @@ public:
 	UFUNCTION()
 		void SpawnAITargets();
 
+	UPROPERTY(EditAnywhere, Category = "UI")
+		TSubclassOf<UUserWidget> NextRoundWidgetClass;
+
 	
 protected:
 	// Called when the game starts

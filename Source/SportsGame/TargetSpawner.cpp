@@ -7,6 +7,7 @@
 #include "Engine/World.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Blueprint/UserWidget.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -19,6 +20,19 @@ void UTargetSpawner::EndAimMode()
 {
 	bCanSpawn = false;
 	UE_LOG(LogTemp, Warning, TEXT("Aim mode ended."));
+
+	// Show UI to proceed to next round
+	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if (PC && NextRoundWidgetClass)
+	{
+		UUserWidget* NextRoundWidget = CreateWidget<UUserWidget>(PC, NextRoundWidgetClass);
+		if (NextRoundWidget)
+		{
+			NextRoundWidget->AddToViewport();
+			PC->SetInputMode(FInputModeUIOnly());
+			PC->bShowMouseCursor = true;
+		}
+	}
 }
 
 void UTargetSpawner::RegisterShot(bool bHit)
