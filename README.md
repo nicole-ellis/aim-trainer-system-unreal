@@ -1,6 +1,6 @@
 # SportsGame
 
-**Aim Training Simulator Sports Sports**
+**Aim Training Simulator Sports Game**
 
 **Movement:**<br>
 W - Forward<br>
