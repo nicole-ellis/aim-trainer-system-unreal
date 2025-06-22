@@ -7,6 +7,13 @@
 #include "NavigationSystem.h"
 #include "TargetSpawner.generated.h"
 
+UENUM(BlueprintType)
+enum class EAimTrainerLevelMode :uint8
+{
+	DropTargets UMETA(DisplayName = "Drop Targets"),
+	ExplodingTargets UMETA (DisplayName = "Exploding Targets"),
+	AIMovingTargets UMETA (DisplayName = "AI Moving Targets")
+};
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SPORTSGAME_API UTargetSpawner : public USceneComponent
@@ -47,8 +54,20 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void BeginTraining();
-
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Level")
+		EAimTrainerLevelMode LevelMode;
+
+	UPROPERTY(EditAnywhere, Category = "Spawn")
+		float LaunchStrength = 500.0f;
+
+	UFUNCTION()
+		void SpawnFallingTargets();
+	UFUNCTION()
+		void SpawnShootingTargets();
+	UFUNCTION()
+		void SpawnAITargets();
+
 	
 protected:
 	// Called when the game starts
@@ -68,10 +87,10 @@ public:
 		float HorizontalSpread = 1000.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
-		float VerticalMin = 100.0f;
+		float VerticalMin = 50.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
-		float VerticalMax = 200.0f;
+		float VerticalMax = 500.0f;
 	
 	UFUNCTION(BlueprintCallable)
 		void SpawnTargets();

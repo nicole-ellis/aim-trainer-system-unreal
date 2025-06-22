@@ -23,3 +23,26 @@ void AAimTrainerGameMode::BeginPlay()
 	GetWorld()->GetFirstPlayerController()->SetShowMouseCursor(false);
 	
 }
+
+void AAimTrainerGameMode::StartNextRound()
+{
+	if (!TargetSpawner) return;
+
+	if (CurrentLevelIndex < LevelModes.Num())
+	{
+		TargetSpawner->LevelMode = LevelModes[CurrentLevelIndex];
+		TargetSpawner->BeginTraining();
+		CurrentLevelIndex++;
+	}
+	else
+	{
+		// Show leaderboard/final screen
+		ShowFinalScore();
+	}
+}
+
+void AAimTrainerGameMode::ShowFinalScore()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Final Score: Show Leaderboard or summary screen here"))
+	// Replace with actual logic
+}

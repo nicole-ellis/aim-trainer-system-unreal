@@ -344,19 +344,6 @@ void AAimTrainingCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//if (Attempts++)
-	//{
-	//	if (InGameUIAimTraining)
-	//	{
-	//		InGameUIAimTraining->UpdateValues();
-	//	}
-	//}
-
-	//if (GetAccuracy())
-	//{
-		
-	//}
-
 }
 
 // Called to bind functionality to input
