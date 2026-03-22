@@ -1,4 +1,4 @@
-# SportsGame
+# E-Sports Game
 
 **Aim Training Simulator Sports Game**
 
