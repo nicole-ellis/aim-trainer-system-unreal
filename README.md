@@ -1,36 +1,35 @@
-# E-Sports Game
+# Aim Trainer System (Unreal Engine 5, C++)
 
-**Aim Training Simulator Sports Game**
+## Overview
+A modular aim training system designed to simulate high-intensity target scenarios while tracking player performance metrics in real time.
 
-**Movement:**<br>
-W - Forward<br>
-A - Left<br>
-S - Back<br>
-D - Right
+## Key Features
+- Dynamic target spawning using NavMesh
+- Multi-round gameplay system with varying mechanics:
+  - Falling targets (gravity-based)
+  - Exploding targets (physics impulses)
+  - AI-controlled moving targets
+- Real-time performance tracking:
+  - Accuracy
+  - Shots fired
+  - Shots hit
+- UI feedback system for player improvement
 
-**Pressable Buttons:**<br>
-E - Used to press the button to start the level<br>
-Left click - Used to fire (shoot) at targets
+## System Architecture
+- `AAimTrainingCharacter`
+  - Handles shooting, accuracy tracking, and player state
+- `TargetSpawner`
+  - Manages spawning, lifecycle, and replacement of targets
+- `GameMode`
+  - Controls round flow and session timing
 
-**Core Mechanics:**<br>
-- Player is able to switch between third person and first person POV<br>
-- Player is able to press a button<br>
-- Player is able to shoot respawning targets<br>
-- Targets respawn to continue the aim training session, after 30 seconds they exit the session
+## Technical Highlights
+- Line tracing for hit detection
+- NavMesh-based spawning for valid placement
+- Timer-based session management
+- Modular round system for extensibility
 
-**Physics Mechanics:**<br>
-- The player has a 30% chance of hitting a target that bounces on the floor before it can be broken to increase difficulty
-
-**UI Elements:**<br>
-- Accuracy, attempts and shots hit are all UI elements that are tracked throughout the game.<br>
-
-**Assignment 2 Additions**<br>
-- Targets are thicker to allow for shots to register every time the player shoots.<br>
-- Targets do not spawn in changing depth
-
-**Needed To Be Debugged But Has Been Coded**<br>
-- UI element for a next round page including buttons for 'Next' 'Retry' 'Quit'<br>
-- 3 different levels of shooting targets<br>
-    - Dropping targets<br>
-    - Exploding targets<br>
-    - AI targets<br>
+## Future Improvements
+- Save/load system for player stats
+- Difficulty scaling system
+- Backend integration for persistent stats
